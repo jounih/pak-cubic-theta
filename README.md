@@ -1,8 +1,10 @@
 # Differential transcendence of the cubic theta series
 
-Igor Pak’s Conjecture 2.6 asks whether the formal power series
+The question is whether the formal power series
 $H(q)=\sum_{n\ge 0} q^{n^3}=1+q+q^8+q^{27}+\cdots$
-is differentially transcendental. The proof here establishes the conjecture over the complex rational function field. [Pak, *Complexity problems in enumerative combinatorics*, Conjecture 2.6, arXiv:1803.06636](https://arxiv.org/abs/1803.06636)
+is differentially transcendental. The proof here establishes the conjecture over the complex rational function field.
+
+P. Chowla and S. Chowla conjectured in 1984 that the power series supported on the positive $k$th powers is differentially transcendental for every integer $k>2$. L. Lipshitz and L. A. Rubel posed the cubic question in 1991. I. Pak stated it as Conjecture 2.6 in his 2018 ICM survey. [Chowla and Chowla, 1984](https://doi.org/10.46298/hrj.1984.107) · [Lipshitz and Rubel, 1991](https://doi.org/10.1007/978-1-4757-4158-2_10) · [Pak, *Complexity problems in enumerative combinatorics*, Conjecture 2.6, arXiv:1803.06636](https://arxiv.org/abs/1803.06636)
 
 Machine-checked by the Lean kernel; independent specialist review welcome. Developed with substantial AI assistance.
 

@@ -1,14 +1,14 @@
 {
-  "title": "Lean 4 proof of Pak’s Conjecture 2.6 on the cubic theta series",
+  "title": "Differential transcendence of the cubic theta series: a Lean 4 proof",
   "creators": [
     {
       "name": "Helminen, Jouni"
     }
   ],
-  "description": "Lean 4 formalization of the differential transcendence of the generating series of nonnegative cubes, as stated in Igor Pak’s 2018 ICM Conjecture 2.6. The package proves algebraic independence of the formal variable, the series, and its successive ordinary derivatives over the complex numbers. Google Gemini and OpenAI Codex provided substantial assistance with the mathematical investigation, manuscript drafting, and Lean formalization. Independent specialist review is welcome.",
+  "description": "Lean 4 formalization of the differential transcendence of the generating series of nonnegative cubes, the cubic case of the conjecture of P. Chowla and S. Chowla (1984). L. Lipshitz and L. A. Rubel posed the cubic question in 1991, and I. Pak stated it as Conjecture 2.6 in his 2018 ICM survey. The package proves algebraic independence of the formal variable, the series, and its successive ordinary derivatives over the complex numbers. Google Gemini and OpenAI Codex provided substantial assistance with the mathematical investigation, manuscript drafting, and Lean formalization. Independent specialist review is welcome.",
   "license": "Apache-2.0",
   "upload_type": "software",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "keywords": [
     "Lean 4",
     "formal verification",

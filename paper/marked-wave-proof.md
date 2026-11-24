@@ -1,6 +1,6 @@
 # Differential transcendence of the cubic theta series
 
-Let $H(q)=\sum_{n\ge0}q^{n^3}$. The Lean theorem proves algebraic independence of $q,H,H',H'',\ldots$ over $\mathbb C$ inside the formal power series ring $\mathbb C[[q]]$. Every algebraic differential equation over $\mathbb C(q)$ would give a polynomial relation among these elements after clearing denominators. This gives exactly the differential transcendence in Pak’s Conjecture 2.6. [Pak, p. 9](https://www.math.ucla.edu/~pak/papers/ICM-paper9.pdf) · [Lean theorem](../PakStokes.lean)
+Let $H(q)=\sum_{n\ge0}q^{n^3}$. The Lean theorem proves algebraic independence of $q,H,H',H'',\ldots$ over $\mathbb C$ inside the formal power series ring $\mathbb C[[q]]$. Every algebraic differential equation over $\mathbb C(q)$ would give a polynomial relation among these elements after clearing denominators. This settles the cubic case. P. Chowla and S. Chowla conjectured in 1984 that the power series supported on the positive $k$th powers is differentially transcendental for every integer $k>2$. L. Lipshitz and L. A. Rubel posed the cubic question in 1991. I. Pak stated it as Conjecture 2.6 in his 2018 ICM survey. [Chowla and Chowla, 1984](https://doi.org/10.46298/hrj.1984.107) · [Lipshitz and Rubel, 1991](https://doi.org/10.1007/978-1-4757-4158-2_10) · [Pak, p. 9](https://www.math.ucla.edu/~pak/papers/ICM-paper9.pdf) · [Lean theorem](../PakStokes.lean)
 
 ## The physical theorem
 

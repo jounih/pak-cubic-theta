@@ -1,7 +1,7 @@
 \documentclass[11pt]{article}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern,amsmath,amssymb,amsthm,microtype}
-\usepackage[letterpaper,margin=1.04in]{geometry}
+\usepackage[letterpaper,hmargin=1.04in,vmargin=0.95in]{geometry}
 \usepackage[colorlinks=true,urlcolor=blue!45!black]{hyperref}
 \usepackage{xcolor}
 \newcommand{\C}{\mathbb C}
@@ -20,17 +20,17 @@
 Jouni Helminen\\[4pt]
 {\small Research proof for independent review \quad 24 November 2026}
 \end{center}
-\noindent\textbf{Abstract.} Pak asked whether the generating function of cubes satisfies any algebraic differential equation. We give an argument against such an equation. The two lateral sums of its formal expansion differ by an explicit sequence of Bessel functions. At a prime index the corresponding exponential cannot be assembled from smaller ones. A putative equation would therefore give a single finite characteristic polynomial with infinitely many distinct roots. The cubic case alone is treated here to make each analytic step independently checkable.
+\noindent\textbf{Abstract.} We prove that the generating function of cubes is differentially transcendental. This is the cubic case of a conjecture of Chowla and Chowla (1984), posed for cubes by Lipshitz and Rubel (1991) and stated in Pak's 2018 ICM survey. The difference of two lateral sums is an explicit series of Bessel functions. At prime indices the exponential rates force a putative differential equation to give a nonzero polynomial with infinitely many roots.
 
 \begin{thm}
 $H(q)=\sum_{n\geq 0}q^{n^3}$ and all its derivatives are algebraically independent over $\C(q)$. Equivalently, no nonzero polynomial in $q,H$ and finitely many derivatives of $H$ vanishes identically on $|q|<1$.
 \end{thm}
-The square-exponent series is a theta function and is differentially algebraic. The distinction was formulated explicitly in Conjecture 2.6 of Pak~[1]. Costin and Huang's analysis of lacunary series~[2] already identifies the exponential scales $n^{3/2}$ and the sectorial summability. The question here is what these scales imply about differential equations.
+The square-exponent series is a theta function and is differentially algebraic. Chowla and Chowla conjectured that $\sum_{n\ge1}q^{n^k}$ is differentially transcendental for every integer $k>2$~[6]. Adding the constant term does not affect differential transcendence. Lipshitz and Rubel~[1] posed the cubic question, which appears as Conjecture~2.6 in Pak's ICM survey~[2]. Costin and Huang's analysis of lacunary series~[3] already identifies the exponential scales $n^{3/2}$ and the sectorial summability. The question here is what these scales imply about differential equations.
 
 \head{Formal verification.}
 A second proof works directly on the positive real ray. It marks the fundamental Airy waves by their signed squarefree indices. For the first $J$ derivatives the Jacobian in $J$ independent marks has an invertible Vandermonde limit after row scaling. This proves algebraic independence even when a putative equation has a singular background. The transfer lemma carries an equation in the original formal power series through $q=e^{-1/p^2}$ to an autonomous equation on the regularized physical sum. The Lean theorem \texttt{CubicTheta.pak\_conjecture\_2\_6} states algebraic independence of $q,H,H',\ldots$ in $\C[[q]]$ with no hypotheses. The following sections present the earlier lateral-summation argument.
-\href{https://github.com/jounih/pak-cubic-theta/blob/78d8a496a8ad3f9b5c40080f8885b794f8648022/paper/marked-wave-proof.md}{Physical proof and controls};
-\href{https://github.com/jounih/pak-cubic-theta/blob/78d8a496a8ad3f9b5c40080f8885b794f8648022/LEAN_GUIDE.md}{Lean sources and verification instructions}.
+\href{https://github.com/jounih/pak-cubic-theta/blob/v1.0.1/paper/marked-wave-proof.md}{Physical proof and controls};
+\href{https://github.com/jounih/pak-cubic-theta/blob/v1.0.1/LEAN_GUIDE.md}{Lean sources and verification instructions}.
 
 \head{1. A formal solution on two sides of a cut.}
 Put $q=e^{-t}$. Mellin inversion of $\Gamma(z)\zeta(3z)t^{-z}$ gives
@@ -49,7 +49,7 @@ Normalize the ordinary Borel transformation by $s^j\mapsto u^j/j!$. The function
 \end{align}
 The last identity follows by reversion and $K=T+2xT'$. The inverse map $(T-1)/T^3$ has nonzero finite critical value $4/27$. There $K(x)\sim(\sqrt3/2)(1-27x/4)^{-1/2}$. The negative real axis carries no singularity of this branch.
 
-On either ray $\arg u=\pm\delta$, for small fixed $\delta>0$, the kernels are bounded and decay algebraically at infinity. Splitting the sum at a constant times $1+|u|^{2/3}$ and using $K(x)-K(-x)=O(x)$ near zero gives an $O(1+\log(2+|u|))$ bound, uniformly in a small wedge about each ray. Define $Y_\pm=s^{-1}\int e^{-u/s}\widehat f(u)\,du$ on these rays. These are the two directional $1$-sums of $f$. Directional summation fixes convergent germs and commutes with sums, products and derivatives~[3]. Thus a polynomial equation for the formal $f$ holds for \emph{both} $Y_\pm$ on a common sector containing small positive $s$. No identification of either lateral sum with $H$ on a specific ray is needed.
+On either ray $\arg u=\pm\delta$, for small fixed $\delta>0$, the kernels are bounded and decay algebraically at infinity. Splitting the sum at a constant times $1+|u|^{2/3}$ and using $K(x)-K(-x)=O(x)$ near zero gives an $O(1+\log(2+|u|))$ bound, uniformly in a small wedge about each ray. Define $Y_\pm=s^{-1}\int e^{-u/s}\widehat f(u)\,du$ on these rays. These are the two directional $1$-sums of $f$. Directional summation fixes convergent germs and commutes with sums, products and derivatives~[4]. Thus a polynomial equation for the formal $f$ holds for \emph{both} $Y_\pm$ on a common sector containing small positive $s$. No identification of either lateral sum with $H$ on a specific ray is needed.
 
 \head{2. The jump and its common summation direction.}
 Put $\omega_n=\sqrt{4/27}\,(2\pi n)^{3/2}$. The positive cuts of the first kernel in \eqref{ker} start at $\omega_n$. Its elementary representation $K(4y/27)=\cos(\arcsin(\sqrt y)/3)/\sqrt{1-y}$ follows from the triple-angle formula. Taking the upper minus lower boundary value in \eqref{ker} and setting $v=u/\omega_n-1$ gives
@@ -65,7 +65,7 @@ Indeed, each integrable square-root singularity can be encircled by shrinking th
  W_n=-\frac{\sqrt3}{2\pi n}\frac{\omega_n}{s}\,
                   K_{1/3}(\omega_n/s),
 \]
-where the last $K$ denotes a modified Bessel function, defined by its usual decaying integral~[4].
+where the last $K$ denotes a modified Bessel function, defined by its usual decaying integral~[5].
 
 One must justify extracting an isolated exponential even when the coefficients themselves have divergent expansions. Write $G(v)=\sqrt v\,J(v)$. This is analytic at zero, has $G(0)\ne0$, and continues with polynomial growth in an open wedge about $v>0$. Directly from the jump integral,
 \[
@@ -106,8 +106,10 @@ No nonzero polynomial over the stated base field vanishes on the finite jets in 
 Google Gemini and OpenAI Codex assisted substantially with the mathematical investigation, manuscript drafting, and Lean formalization.
 
 \head{References.}
-[1] I. Pak, \href{https://www.math.ucla.edu/~pak/papers/ICM-paper9.pdf}{\emph{Complexity problems in enumerative combinatorics}}, ICM 2018, Conjecture 2.6.
-[2] O. Costin and M. Huang, \href{https://arxiv.org/abs/0810.3027}{\emph{Behavior of lacunary series at the natural boundary}}, Theorem 4.
-[3] D. Sauzin, \href{https://arxiv.org/abs/1405.0356}{\emph{Introduction to 1-summability and resurgence}}, Parts I--II.
-[4] NIST, \href{https://dlmf.nist.gov/10.32.E9}{DLMF 10.32.9}.
+[1] L. Lipshitz and L. A. Rubel, \href{https://doi.org/10.1007/978-1-4757-4158-2_10}{\emph{A gap theorem for differentially algebraic power series}}, in: D.~V. Chudnovsky et al.\ (eds.), \emph{Number Theory (New York, 1989--1990)}, Springer, New York, 1991, pp.~211--214.
+[2] I. Pak, \href{https://www.math.ucla.edu/~pak/papers/ICM-paper9.pdf}{\emph{Complexity problems in enumerative combinatorics}}, ICM 2018, Conjecture 2.6.
+[3] O. Costin and M. Huang, \href{https://arxiv.org/abs/0810.3027}{\emph{Behavior of lacunary series at the natural boundary}}, Theorem 4.
+[4] D. Sauzin, \href{https://arxiv.org/abs/1405.0356}{\emph{Introduction to 1-summability and resurgence}}, Parts I--II.
+[5] NIST, \href{https://dlmf.nist.gov/10.32.E9}{DLMF 10.32.9}.
+[6] P. Chowla and S. Chowla, \href{https://doi.org/10.46298/hrj.1984.107}{\emph{On algebraic differential equations satisfied by some elliptic functions II}}, Hardy--Ramanujan Journal 7 (1984), 13--16.
 \end{document}
