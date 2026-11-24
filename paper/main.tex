@@ -13,9 +13,11 @@
 \setlength{\parindent}{12pt}
 \setlength{\parskip}{2pt}
 \raggedbottom
+\hypersetup{pdfauthor={Jouni Helminen},pdftitle={A Stokes obstruction for the cubic theta series}}
 \begin{document}
 \begin{center}
 {\Large\bfseries A Stokes obstruction for the cubic theta series}\\[6pt]
+Jouni Helminen\\[4pt]
 {\small Research proof for independent review \quad 24 November 2026}
 \end{center}
 \noindent\textbf{Abstract.} Pak asked whether the generating function of cubes satisfies any algebraic differential equation. We give an argument against such an equation. The two lateral sums of its formal expansion differ by an explicit sequence of Bessel functions. At a prime index the corresponding exponential cannot be assembled from smaller ones. A putative equation would therefore give a single finite characteristic polynomial with infinitely many distinct roots. The cubic case alone is treated here to make each analytic step independently checkable.
@@ -27,8 +29,8 @@ The square-exponent series is a theta function and is differentially algebraic. 
 
 \head{Formal verification.}
 A second proof works directly on the positive real ray. It marks the fundamental Airy waves by their signed squarefree indices. For the first $J$ derivatives the Jacobian in $J$ independent marks has an invertible Vandermonde limit after row scaling. This proves algebraic independence even when a putative equation has a singular background. The transfer lemma carries an equation in the original formal power series through $q=e^{-1/p^2}$ to an autonomous equation on the regularized physical sum. The Lean theorem \texttt{CubicTheta.pak\_conjecture\_2\_6} states algebraic independence of $q,H,H',\ldots$ in $\C[[q]]$ with no hypotheses. The following sections present the earlier lateral-summation argument.
-\href{marked-wave-proof.md}{Physical proof and controls};
-\href{../LEAN_GUIDE.md}{Lean sources and verification instructions}.
+\href{https://github.com/jounih/pak-cubic-theta/blob/78d8a496a8ad3f9b5c40080f8885b794f8648022/paper/marked-wave-proof.md}{Physical proof and controls};
+\href{https://github.com/jounih/pak-cubic-theta/blob/78d8a496a8ad3f9b5c40080f8885b794f8648022/LEAN_GUIDE.md}{Lean sources and verification instructions}.
 
 \head{1. A formal solution on two sides of a cut.}
 Put $q=e^{-t}$. Mellin inversion of $\Gamma(z)\zeta(3z)t^{-z}$ gives
@@ -100,6 +102,9 @@ This polynomial is nonzero and independent of $p$. Infinitely many odd primes gi
 No nonzero polynomial over the stated base field vanishes on the finite jets in the theorem. In particular the generating function of ordered sums of $k$ nonnegative cubes, $H(q)^k$, is also differentially transcendental, since $H$ is algebraic over $H^k$. These statements concern exact identities. They do not imply computational lower bounds for approximate counts. The formal theorem in this release concerns the cubic series. Direct lateral quadrature against the Bessel expression and an exact finite-coefficient test exercise the constants and cancellations. Neither supplies the infinite-order conclusion. Priority and external specialist review are open.
 
 \small
+\head{Acknowledgments.}
+Google Gemini and OpenAI Codex assisted substantially with the mathematical investigation, manuscript drafting, and Lean formalization.
+
 \head{References.}
 [1] I. Pak, \href{https://www.math.ucla.edu/~pak/papers/ICM-paper9.pdf}{\emph{Complexity problems in enumerative combinatorics}}, ICM 2018, Conjecture 2.6.
 [2] O. Costin and M. Huang, \href{https://arxiv.org/abs/0810.3027}{\emph{Behavior of lacunary series at the natural boundary}}, Theorem 4.
