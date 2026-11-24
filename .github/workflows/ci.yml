@@ -1,0 +1,24 @@
+name: Build and check axioms
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: leanprover/lean-action@v1
+        with:
+          build: "true"
+          use-mathlib-cache: "true"
+          use-github-cache: "false"
+      - name: Verify the theorem and axiom list
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean Verify.lean | tee verify.log
+          tail -n 1 verify.log | grep -Fx "'CubicTheta.pak_conjecture_2_6' depends on axioms: [propext, Classical.choice, Quot.sound]"
+          if grep -E 'sorryAx|Lean\.ofReduceBool|Lean\.trustCompiler' verify.log; then
+            exit 1
+          fi

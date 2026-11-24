@@ -1,0 +1,108 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,amsmath,amssymb,amsthm,microtype}
+\usepackage[letterpaper,margin=1.04in]{geometry}
+\usepackage[colorlinks=true,urlcolor=blue!45!black]{hyperref}
+\usepackage{xcolor}
+\newcommand{\C}{\mathbb C}
+\newcommand{\B}{\mathcal B}
+\newcommand{\pp}{\partial}
+\newtheorem*{thm}{Theorem}
+\newtheorem*{lem}{Lemma}
+\newcommand{\head}[1]{\par\medskip\noindent\textbf{#1}\quad}
+\setlength{\parindent}{12pt}
+\setlength{\parskip}{2pt}
+\raggedbottom
+\begin{document}
+\begin{center}
+{\Large\bfseries A Stokes obstruction for the cubic theta series}\\[6pt]
+{\small Research proof for independent review \quad 24 November 2026}
+\end{center}
+\noindent\textbf{Abstract.} Pak asked whether the generating function of cubes satisfies any algebraic differential equation. We give an argument against such an equation. The two lateral sums of its formal expansion differ by an explicit sequence of Bessel functions. At a prime index the corresponding exponential cannot be assembled from smaller ones. A putative equation would therefore give a single finite characteristic polynomial with infinitely many distinct roots. The cubic case alone is treated here to make each analytic step independently checkable.
+
+\begin{thm}
+$H(q)=\sum_{n\geq 0}q^{n^3}$ and all its derivatives are algebraically independent over $\C(q)$. Equivalently, no nonzero polynomial in $q,H$ and finitely many derivatives of $H$ vanishes identically on $|q|<1$.
+\end{thm}
+The square-exponent series is a theta function and is differentially algebraic. The distinction was formulated explicitly in Conjecture 2.6 of Pak~[1]. Costin and Huang's analysis of lacunary series~[2] already identifies the exponential scales $n^{3/2}$ and the sectorial summability. The question here is what these scales imply about differential equations.
+
+\head{Formal verification.}
+A second proof works directly on the positive real ray. It marks the fundamental Airy waves by their signed squarefree indices. For the first $J$ derivatives the Jacobian in $J$ independent marks has an invertible Vandermonde limit after row scaling. This proves algebraic independence even when a putative equation has a singular background. The transfer lemma carries an equation in the original formal power series through $q=e^{-1/p^2}$ to an autonomous equation on the regularized physical sum. The Lean theorem \texttt{CubicTheta.pak\_conjecture\_2\_6} states algebraic independence of $q,H,H',\ldots$ in $\C[[q]]$ with no hypotheses. The following sections present the earlier lateral-summation argument.
+\href{marked-wave-proof.md}{Physical proof and controls};
+\href{../LEAN_GUIDE.md}{Lean sources and verification instructions}.
+
+\head{1. A formal solution on two sides of a cut.}
+Put $q=e^{-t}$. Mellin inversion of $\Gamma(z)\zeta(3z)t^{-z}$ gives
+\[
+ H(e^{-t})\sim\Gamma(4/3)t^{-1/3}+\tfrac12+
+       \sum_{j\geq1}(-1)^j\zeta(-3j)t^j/j!,\qquad t\downarrow0.
+\]
+Moving the contour past any finite set of gamma poles proves the expansions to all orders, also after differentiating a fixed number of times. Rotate the regular formal series by $t=-is^2$ and denote it by $f(s)$. An algebraic differential equation for $H$ gives one for $f$ over convergent Puiseux germs at $s=0$: the changes of variable and removal of the explicit polar term are invertible triangular changes of jets. Algebraic descent to the field of convergent Laurent germs follows by taking the product of the polynomial with its conjugates over the finite ramification. Use $\pp=s^2d/ds$ throughout.
+
+Normalize the ordinary Borel transformation by $s^j\mapsto u^j/j!$. The functional equation of $\zeta$ gives the convergent germ
+\begin{align}
+ \widehat f(u)&=-\frac1{2\pi i}\sum_{n\geq1}\frac1n
+       [K(u^2/(2\pi n)^3)-K(-u^2/(2\pi n)^3)],\label{ker}\\
+ K(x)&=\sum_{j\geq0}\binom{3j}{j}x^j
+       =\frac{T}{3-2T},\qquad T=1+xT^3,\quad T(0)=1.\nonumber
+\end{align}
+The last identity follows by reversion and $K=T+2xT'$. The inverse map $(T-1)/T^3$ has nonzero finite critical value $4/27$. There $K(x)\sim(\sqrt3/2)(1-27x/4)^{-1/2}$. The negative real axis carries no singularity of this branch.
+
+On either ray $\arg u=\pm\delta$, for small fixed $\delta>0$, the kernels are bounded and decay algebraically at infinity. Splitting the sum at a constant times $1+|u|^{2/3}$ and using $K(x)-K(-x)=O(x)$ near zero gives an $O(1+\log(2+|u|))$ bound, uniformly in a small wedge about each ray. Define $Y_\pm=s^{-1}\int e^{-u/s}\widehat f(u)\,du$ on these rays. These are the two directional $1$-sums of $f$. Directional summation fixes convergent germs and commutes with sums, products and derivatives~[3]. Thus a polynomial equation for the formal $f$ holds for \emph{both} $Y_\pm$ on a common sector containing small positive $s$. No identification of either lateral sum with $H$ on a specific ray is needed.
+
+\head{2. The jump and its common summation direction.}
+Put $\omega_n=\sqrt{4/27}\,(2\pi n)^{3/2}$. The positive cuts of the first kernel in \eqref{ker} start at $\omega_n$. Its elementary representation $K(4y/27)=\cos(\arcsin(\sqrt y)/3)/\sqrt{1-y}$ follows from the triple-angle formula. Taking the upper minus lower boundary value in \eqref{ker} and setting $v=u/\omega_n-1$ gives
+\begin{align}
+ Y_+-Y_- &=\sum_{n\geq1}W_n(s),\qquad
+ W_n=\frac{e^{-\omega_n/s}}n\,\frac{\omega_n}{s}
+ \int_0^\infty e^{-\omega_n v/s}J(v)\,dv,\\
+ J(v)&=-\frac{\sqrt3}{2\pi}
+ \frac{\cosh(\tfrac13\operatorname{arcosh}(1+v))}{\sqrt{v(2+v)}}.
+\end{align}
+Indeed, each integrable square-root singularity can be encircled by shrinking the contour to the cut. Interchange with the original ray integrals follows by splitting the absolutely convergent difference of kernels as above. After contour deformation the individual jumps are absolutely summable on the positive $s$-radius. Substitution $1+v=\cosh y$ gives the independent formula
+\[
+ W_n=-\frac{\sqrt3}{2\pi n}\frac{\omega_n}{s}\,
+                  K_{1/3}(\omega_n/s),
+\]
+where the last $K$ denotes a modified Bessel function, defined by its usual decaying integral~[4].
+
+One must justify extracting an isolated exponential even when the coefficients themselves have divergent expansions. Write $G(v)=\sqrt v\,J(v)$. This is analytic at zero, has $G(0)\ne0$, and continues with polynomial growth in an open wedge about $v>0$. Directly from the jump integral,
+\[
+ W_n=n^{-1}e^{-\omega_n/s}(\omega_n/s)^{1/2} g(s/\omega_n),
+ \qquad g(0)\ \text{asymptotically}=\sqrt\pi\,G(0)\ne0 .
+\]
+In fact $g$ is the directional $1$-sum in every sufficiently small direction of the \emph{same} formal power series. Its ordinary Borel kernel is
+$\pi^{-1/2}\int_0^1 G(uv)/\sqrt{v(1-v)}\,dv$.
+The beta integral gives the Taylor coefficients and, by exchanging the two integrals on the positive ray, gives the displayed Laplace representation. Deforming within the wedge gives the other directions. Fix the lower direction used to define $Y_-$. The latter, the amplitudes $g(s/\omega_n)$ and their jets all belong to this single summation algebra with Laurent powers and $s^{1/2}$ adjoined. A nonzero member has a first nonzero Puiseux coefficient: directional summation sends formal zero to zero, and the two parities of half powers separate. Along positive $s$ this first coefficient gives a genuine power asymptotic.
+
+For each fixed $j$ and small positive $s$, differentiating the convergent integral yields
+\[
+ |\pp^j W_n(s)|\ \leq\
+ \frac{C_j}{n}(\omega_n/s)^{1/2}(1+\omega_n)^j e^{-\omega_n/s}.
+\]
+Here $J(v)=O(v^{-1/2})$ near zero and grows at most polynomially at infinity. For fixed $n$ we also have $\pp^jW_n/W_n\to\omega_n^j$ as $s\downarrow0$.
+
+\head{3. Prime indices force infinitely many characteristic roots.}
+Choose a nonzero relation $P$ for $f$ of least total degree in the jets among all relations (with coefficients in the convergent Laurent germs). Each partial $P_j$ with respect to an occurring jet is formally nonzero on the solution, by minimality in characteristic zero. Substitute $Y_+=Y_-+\sum_n W_n$ into $P$ and expand the finite polynomial about $Y_-$. Since $P(Y_-)=P(Y_+)=0$, the resulting sum of exponentials vanishes.
+
+The actions in that sum are positive finite sums of the $\omega_n$, with at most $\deg P$ summands. They are locally finite and each action has finitely many representations. The coefficient after stripping a given exponential belongs to the common summation algebra of Section~2. If any such coefficient were nonzero, take the least action for which this happens. The tail divided by its exponential is exponentially small: reserve a fixed baseline $1/s_0$ in the exponent to sum the absolute derivative bounds, and use the positive gap to the next action. The remaining powers of $s^{-1}$ have a common bound because the polynomial degree and derivative orders are fixed. The first Puiseux term of the chosen coefficient contradicts this estimate. Every grouped coefficient must vanish.
+
+In fact the indecomposable actions are exactly those with squarefree index. Write $A_n=n\sqrt n$ after removing the common scale. If $d$ is squarefree and $0<m<d$, then $dm$ is nonsquare: $dm=b^2$ would give $d\mid b$ and hence $d\mid m$. Multiply a putative rational linear combination of smaller $A_m$ equal to $A_d$ by $\sqrt d$ and take the field trace to $\mathbb Q$ in a finite field extension containing these radicals. Each $\sqrt{dm}$ has trace zero by its quadratic minimal polynomial and transitivity of trace, whereas the left target becomes the nonzero rational $d^2$. Conversely, $A_{k^2m}=k^3 A_m$ for $k\ge2$. In particular at a prime $p$ the sole contribution to the coefficient of $e^{-\omega_p/s}$ is the linear one:
+\[
+ 0=\sum_j P_j(Y_-,\pp Y_-,\ldots)\,\pp^j W_p .
+\]
+Write $P_j(Y_-,\ldots)\sim c_j s^{v_j}$ for each occurring partial and put $v=\min v_j$. Dividing by $W_p s^v$ and taking $s\to0^+$ gives
+\[
+                   \sum_{v_j=v}c_j\omega_p^j=0.
+\]
+This polynomial is nonzero and independent of $p$. Infinitely many odd primes give distinct roots, a contradiction. \hfill$\square$
+
+\head{Scope and checks.}
+No nonzero polynomial over the stated base field vanishes on the finite jets in the theorem. In particular the generating function of ordered sums of $k$ nonnegative cubes, $H(q)^k$, is also differentially transcendental, since $H$ is algebraic over $H^k$. These statements concern exact identities. They do not imply computational lower bounds for approximate counts. The formal theorem in this release concerns the cubic series. Direct lateral quadrature against the Bessel expression and an exact finite-coefficient test exercise the constants and cancellations. Neither supplies the infinite-order conclusion. Priority and external specialist review are open.
+
+\small
+\head{References.}
+[1] I. Pak, \href{https://www.math.ucla.edu/~pak/papers/ICM-paper9.pdf}{\emph{Complexity problems in enumerative combinatorics}}, ICM 2018, Conjecture 2.6.
+[2] O. Costin and M. Huang, \href{https://arxiv.org/abs/0810.3027}{\emph{Behavior of lacunary series at the natural boundary}}, Theorem 4.
+[3] D. Sauzin, \href{https://arxiv.org/abs/1405.0356}{\emph{Introduction to 1-summability and resurgence}}, Parts I--II.
+[4] NIST, \href{https://dlmf.nist.gov/10.32.E9}{DLMF 10.32.9}.
+\end{document}
